@@ -1,0 +1,29 @@
+package hibernate.course.demo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import hibernate.course.entity.Student;
+
+public class CreateStudentDemo {
+
+	public static void main(String[] args) {
+		
+		// CREATE SESSION FACTORY
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class)
+				.buildSessionFactory();
+		
+		// CREATE SESSION
+		Session session = factory.getCurrentSession();
+		
+		try {
+			
+		} finally {
+			factory.close();
+		}
+	}
+
+}

@@ -1,0 +1,47 @@
+package hibernate.course.demo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import hibernate.course.entity.Student;
+
+public class UpdateStudentDemo {
+
+	public static void main(String[] args) {
+		
+		// CREATE SESSION FACTORY
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class)
+				.buildSessionFactory();
+		
+		// CREATE SESSION
+		Session session = factory.getCurrentSession();
+		
+		try {
+			int studentID = 1;
+			
+			// FIND OUT THE STUDENTS ID
+			System.out.println(">>Saved student. Generated id: " + student.getId());
+			
+			// GET A NEW SESSION AND START TRANSACTION
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			// RETRIEVE A STUDENT BASED IN THE ID: PRIMARY KEY
+			System.out.println("\n>>Getting student with id: " + student.getId());
+			Student myStudent = session.get(Student.class, student.getId());
+			System.out.println(">>Get complete: " + myStudent);
+			
+			// COMMIT TRANSACTION
+			session.getTransaction().commit();
+			
+			System.out.println(">>DONE<<");
+			
+		} finally {
+			factory.close();
+		}
+	}
+
+}

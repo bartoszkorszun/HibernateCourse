@@ -1,0 +1,41 @@
+package hibernate.course.demo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import hibernate.course.entity.Student;
+
+public class QueryStudentDemo {
+
+	public static void main(String[] args) {
+		
+		// CREATE SESSION FACTORY
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class)
+				.buildSessionFactory();
+		
+		// CREATE SESSION
+		Session session = factory.getCurrentSession();
+		
+		try {			
+			// START TRANSACTION
+			session.beginTransaction();
+			
+			// QUERY STUDENTS
+			List<Student> students = session.createQuery("from Student").getResultList();
+			
+			// DISPLAY STUDENTS
+			
+			// COMMIT TRANSACTION
+			session.getTransaction().commit();
+			
+			System.out.println(">>DONE<<");
+			
+		} finally {
+			factory.close();
+		}
+	}
+
+}
