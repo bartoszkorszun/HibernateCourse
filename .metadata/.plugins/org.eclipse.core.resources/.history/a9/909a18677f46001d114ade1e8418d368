@@ -1,5 +1,0 @@
-package hibernate.course.entity;
-
-public class Student {
-
-}
